@@ -1,0 +1,157 @@
+参考网页：
+参考文档：groff_man 
+一 man 文件格式：
+    .\"表示:行首注释  而\":表示在行中的注释  
+    .\":create命令程序手册页的实例  
+    .TH CREATE 1 "2012-06-28" "create 1.01" "User Commands"  
+    .\"CREATE:表示标题  
+    .\"1:表示此命令出现在手册页的第几部分,范围为1-8的数字,和定义这个文件名小数点后的数字一致  
+    .\""2012-06-28":表示"2012-06-28"显示在整个页的下中  
+    .\""create 1.01":表示"create 1.01"显示在整个页的左下  
+    .\""User Commands":表示"User Commands"显示在整个页的上中  
+    .\".TH在文件的开始,主要说明标题  
+    .SH NAME  
+    .\"说明名称  
+    .\".SH从行首开始,靠左边,宽体  
+    \fBcreate\fR \- A simple demonstration application creates a file that head file or c file .  
+    .\"-:表示为\-  
+    .SH SYNOPSIS  
+    .\"说明语法格式  
+    .B create  
+    .\".B:表示宽体,如果本行没有文字,则.B标签的下一行为宽体  
+    \-OPTION... FILE...  
+    .SH DESCRIPTION  
+    .\"说明本命令或程序等的相关描述  
+    This manual page document is from Sunrier . \fBcreate\fR is a common application for create a new file that .c or .h file .  
+    .\"\fB文字\fR:表示将该文字设置成宽体  
+    .\"\fI文字\fR:表示将文字加下划线  
+    .\".:表示为\&.  
+    .SH OPTIONS  
+    .\"说明参数选项设置  
+    It will decide to create a .h file or .c file   
+    .sp  
+    .\".sp:表示空行  
+    .B \-h  
+    It will create a new head file   
+    .sp  
+    .B \-c  
+    It will create a new c file  
+    .sp  
+    .B \-\-help  
+    display this help and exit  
+    .sp  
+    .B \-\-version  
+    output version information and exit  
+    .SH COPYRIGHT  
+    .\":版权声明  
+    \fBcreate\fR is Copyright Sunrier .This program is free  software ,you can redistribute it or modify it under the GNU General Public License as published by the free software foundation .  
+    .SH SEE ALSO  
+    .\":其他参考  
+    This program is a template of c and h files to quickly create .  
+    .SH REPORTING BUGS  
+    .\":漏洞说明  
+    .TP 0  
+    .\".TP n:表示TP标签下的第2行开始缩进n个字符(在第1行超过n字符的前提下)　n默认值为7  
+    .\".TP 0:表示Report bugs to <sunrier@gmail.com> .这一句缩进0个字符,这句即为了实现换行的作用  
+    There probably are some,but I don't know that what they are yet.  
+    Report bugs to <sunrier@gmail.com> .  
+    .SH AUTHOR  
+    .\":文档编写作者  
+    Written by Sunrier .  
+      
+    .\"看显示创建man手册命令的结果groff -Tascii -man create.1(注:此时不会创建任务文件,只是看下显示效果)  
+    .\"gzip create.1 把create.1压缩成.gz 文件,会创建一个create.1.gz的文件,而create.1文件会在gzip执行完后删除  
+    .\"如果想保留原文件可以这样用:gzip -c create.1 > create.1.gz  
+    .\"把文件create.1.gz放到/usr/share/man/man1下就可以完成create命令的man手册了  
+    .\"当执行man create后还会在在/var/cache/man/cat1/create.1.bz2创建一个create.1.bz2压缩文件  
+
+
+一个例子：
+
+.TH sprintf_ksx 1 "2017年 03月 21日 星期二 16:48:37 GMT author:ksx"
+.SH NAME
+sprintf_ksx
+.SH SYNOPSIS
+/*
+ * flags -s ds
+ * da fdsf
+ * fdsa
+ */
+.SH EXAMPLE
+#include<stdio.h>
+int main()
+{ 
+	printf("helloworld\n");
+	return 0;
+}
+
+helplink:some url
+// http://www.google.com
+the standard the include file path in the system
+//要保持原有的例子的格式而不是在同一行，则需要用.EX  .EE 
+如：一个例子：
+.TH ksx_getip " 1 2017年 04月 02日 星期日 16:09:43 GMT author:ksx"
+.SH NAME
+//getip_address funtion
+.SH SYNOPSIS
+//key word :ifreq
+
+ * /* Interface request structure used for socket ioctl's.  All interface
+   ioctl's must have parameter definitions which begin with ifr_name.
+   The remainder may be interface specific.  */
+
+.SH NOTE
+.SH EXAMPLE
+
+.EX
+
+#include<sys/socket.h>//func:soket()
+#include<sys/ioctl.h>//func:ioctl()
+#include<errno.h>//func :perror()
+#include<string.h>//strcpy
+#include<stdio.h>//sprintf
+#include<net/if.h>//ifreq
+#include<netinet/in.h>//sockaddr_in
+#include<arpa/inet.h>//inet_ntoa
+#include<stdlib.h>//EXIT_FAILURE
+char ip[128];
+int get_addr(char *interface_name)
+{
+	int inet_sock;
+	struct ifreq ifr;
+	inet_sock=socket(AF_INET,SOCK_DGRAM,0);
+	strcpy(ifr.ifr_name,interface_name);
+	if(ioctl(inet_sock,SIOCGIFADDR,&ifr)<0)
+	{
+		perror("bind");
+		exit(EXIT_FAILURE);
+	}
+	sprintf(ip,"%s",inet_ntoa(((struct sockaddr_in*)&(ifr.ifr_addr))->sin_addr));       return 0;
+}
+
+int main()
+{
+	char *name="ppp0";
+	get_addr(name);
+        printf("ipaddress:%s",ip);
+	return 0;
+}
+
+.TP
+helplink:some url
+.EE
+the standard the include file path in the system
+ipaddress:10.170.49.233
+
+二　形成man文件后，需要的下一步工作：
+举例子：
+1 生成：create.1
+2 生成 :create.1.gz　　（该后缀名或者导入）
+3 移动该文件：.1.gz到　/usr/share/man/man1文件夹中　　注意，后面后缀名为.1.gz
+
+接着man create即可
+三 一个自动化生成man格式文档的.sh脚本:create_test_file.sh
+生成一个文件后，可以往其中按照格式填入程序语言，之后再运行这个脚本，以另外的参数，
+就可以部署好man 文档到系统
+
+
